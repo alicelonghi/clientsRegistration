@@ -6,14 +6,25 @@ import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 
 import { Client, ClientDocument } from './entities/client.entity';
+import { GeocodingService } from 'src/modules/geocoding/geocoding.service';
 
 @Injectable()
 export class ClientsService {
   constructor(
     @InjectModel(Client.name) private clientModel: Model<ClientDocument>,
+    private geocodingService: GeocodingService,
   ) {}
 
-  create(createClientDto: CreateClientDto) {
+  async create(createClientDto: CreateClientDto) {
+    if (createClientDto.address) {
+      const address = `${createClientDto.address.street}, ${createClientDto.address.number}, ${createClientDto.address.city}, ${createClientDto.address.state}, ${createClientDto.address.country}`;
+      const geolocation = await this.geocodingService.getCoordinates(address);
+
+      if (geolocation) {
+        createClientDto.address.geolocation = geolocation;
+      }
+    }
+
     const client = new this.clientModel(createClientDto);
     return client.save();
   }
