@@ -15,7 +15,7 @@ export class GeocodingService {
           format: 'json',
         },
         headers: {
-          'User-Agent': 'MyApp/1.0 (youremail@example.com)', // Altere conforme necessário
+          'User-Agent': 'MyApp/1.0',
         },
       });
 
