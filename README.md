@@ -17,7 +17,7 @@ Este projeto é dividido em duas partes: **Frontend** e **Backend**. O **Fronten
 
 ### 1. Instalação das dependências
 
-No frontend, estamos usando o **Vite** como bundler para otimizar o processo de build e desenvolvimento. O **React** é usado para criar a interface do usuário.
+No frontend, estou usando o **Vite** como bundler para otimizar o processo de build e desenvolvimento.
 
 ```bash
 # Navegue até a pasta do frontend
