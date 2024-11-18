@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { ClientsService } from './clients.service';
 import { CreateClientDto } from './dto/create-client.dto';
@@ -18,6 +19,11 @@ export class ClientsController {
   @Post()
   create(@Body() createClientDto: CreateClientDto) {
     return this.clientsService.create(createClientDto);
+  }
+
+  @Delete('all')
+  removeAll() {
+    return this.clientsService.removeAll();
   }
 
   @Get()

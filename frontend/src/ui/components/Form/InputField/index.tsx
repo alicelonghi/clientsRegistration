@@ -1,36 +1,36 @@
+import React from "react";
 import { useFormContext } from "react-hook-form";
 
-const InputField: React.FC<{ name: string; label: string; type?: string }> = ({
-  name,
-  label,
-  type = "text",
-}) => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext();
+interface InputFieldProps {
+  label: string;
+  children?: React.ReactNode;
+}
 
+const InputField: React.FC<InputFieldProps> = ({
+  label,
+  children,
+  ...props
+}) => {
   return (
-    <div style={{ marginBottom: "16px" }}>
-      <label>
-        {label}
+    <div
+      style={{ marginBottom: "16px", display: "flex", alignItems: "center" }}
+    >
+      <div className="w-full">
+        <label className="block text-sm font-medium text-gray-700">
+          {label}
+        </label>
         <input
-          {...register(name)}
-          type={type}
-          style={{
-            display: "block",
-            width: "100%",
-            padding: "8px",
-            marginTop: "4px",
-            border: "1px solid #ccc",
-            borderRadius: "4px",
-          }}
+          {...props}
+          className="block w-full p-2 mt-1 border border-gray-300 rounded"
         />
-      </label>
-      {errors[name] && (
-        <span style={{ color: "red", fontSize: "12px" }}>
-          {errors[name]?.message as string}
-        </span>
+      </div>
+
+      {children && (
+        <div
+          style={{ marginLeft: "8px", display: "flex", alignItems: "center" }}
+        >
+          {children}
+        </div>
       )}
     </div>
   );

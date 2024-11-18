@@ -6,10 +6,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": {
-        target: "delivery-api-alicelonghi-alicelonghis-projects.vercel.app",
+      "/clients": {
+        target: "https://delivery-map87ml2o-alicelonghis-projects.vercel.app",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        secure: true,
       },
     },
   },

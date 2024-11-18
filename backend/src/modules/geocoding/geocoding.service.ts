@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import axios from 'axios';
 
 @Injectable()
@@ -19,28 +19,22 @@ export class GeocodingService {
         },
       });
 
-      if (response.data.length === 0) {
-        throw new Error(
-          `Nenhuma localização encontrada para o endereço: ${address}`,
+      if (response.data.length > 0) {
+        const location = response.data[0];
+        return {
+          latitude: parseFloat(location.lat),
+          longitude: parseFloat(location.lon),
+        };
+      } else {
+        throw new HttpException(
+          'Endereço não encontrado',
+          HttpStatus.BAD_REQUEST,
         );
       }
-
-      const location = response.data[0];
-      return {
-        latitude: parseFloat(location.lat),
-        longitude: parseFloat(location.lon),
-      };
     } catch (error) {
-      console.error('Erro ao obter geolocalização:', error);
-      if (error.response) {
-        // Se houver erro na resposta da API
-        throw new Error(
-          `Erro na API de geocodificação: ${error.response.status}`,
-        );
-      }
-      // Caso o erro não seja relacionado à API
-      throw new Error(
-        `Erro ao obter geolocalização para o endereço: ${address}. Detalhes: ${error.message}`,
+      throw new HttpException(
+        'Erro na API de Geocodificação',
+        HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }

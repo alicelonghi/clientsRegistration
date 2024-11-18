@@ -21,7 +21,10 @@ export class ClientsService {
       const geolocation = await this.geocodingService.getCoordinates(address);
 
       if (geolocation) {
-        createClientDto.address.geolocation = geolocation;
+        createClientDto.address.geolocation = {
+          latitude: geolocation.latitude,
+          longitude: geolocation.longitude,
+        };
       }
     }
 
@@ -49,6 +52,14 @@ export class ClientsService {
         new: true,
       },
     );
+  }
+  async removeAll() {
+    try {
+      const result = await this.clientModel.deleteMany({});
+      return { message: 'Todos os clientes foram deletados', result };
+    } catch (error) {
+      throw new Error('Erro ao apagar todos os clientes');
+    }
   }
 
   remove(id: string) {
