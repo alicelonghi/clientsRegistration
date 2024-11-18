@@ -1,4 +1,4 @@
-# README - Como rodar o Frontend e o Backend
+# Projeto Fullstack teste 
 
 Este projeto é dividido em duas partes: **Frontend** e **Backend**. O **Frontend** utiliza **Vite** com **React**, enquanto o **Backend** é desenvolvido com **NestJS**. Abaixo estão as instruções para rodar ambos, além de uma explicação sobre as bibliotecas utilizadas.
 
