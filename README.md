@@ -47,7 +47,7 @@ Tailwind CSS: Framework de CSS utilitário para uma maneira rápida e eficiente 
 ## Backend - NestJS
 
 1. Instalação das dependências
-   No backend, estamos usando o NestJS, que é um framework de Node.js para construir APIs eficientes, escaláveis e de fácil manutenção
+   No backend, usei o NestJS, que é um framework de Node.js para construir APIs eficientes, escaláveis e de fácil manutenção
 
 ### 1. Instalação das dependências
 
